@@ -20,6 +20,7 @@ architecture arch of rom is
 
 type rom_type is array (0 to 15) of std_logic_vector (ROM_DATA_WIDTH-1 downto 0);
 constant ROM: rom_type:= (
+	std_logic_vector(to_unsigned(0,ROM_DATA_WIDTH)),
 	std_logic_vector(to_unsigned(1,ROM_DATA_WIDTH)),
 	std_logic_vector(to_unsigned(2,ROM_DATA_WIDTH)),
 	std_logic_vector(to_unsigned(3,ROM_DATA_WIDTH)),
@@ -34,18 +35,20 @@ constant ROM: rom_type:= (
 	std_logic_vector(to_unsigned(12,ROM_DATA_WIDTH)),
 	std_logic_vector(to_unsigned(13,ROM_DATA_WIDTH)),
 	std_logic_vector(to_unsigned(14,ROM_DATA_WIDTH)),
-	std_logic_vector(to_unsigned(15,ROM_DATA_WIDTH)),
-	std_logic_vector(to_unsigned(16,ROM_DATA_WIDTH))
+	std_logic_vector(to_unsigned(15,ROM_DATA_WIDTH))
+	
 	--others => '0'
 	);
 	
 begin
+	
+
 
 process( clk )
 begin
 
 if (clk'event and clk = '1') then
-	data_out <= ROM(to_integer(unsigned(addr_in)));	
+	data_out <= ROM(to_integer(unsigned(addr_in(ROM_ADDR_WIDTH-1 downto 0))));	
 end if ;
 	
 end process ; -- 

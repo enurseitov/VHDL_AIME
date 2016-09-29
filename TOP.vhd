@@ -3,7 +3,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 
-entity TOP is
+entity  TOP is
     Port ( clk : in  STD_LOGIC;
            rst_n : in  STD_LOGIC;
 			  enable : in  STD_LOGIC;
