@@ -4,8 +4,11 @@ library IEEE;
 
 entity dpram is
 
-generic ( DATA_WIDTH : integer := 12;
-	      ADDR_WIDTH : integer := 32);
+--generic ( DATA_WIDTH : integer := 12;
+--	      ADDR_WIDTH : integer := 32);
+			
+generic ( DATA_WIDTH : integer;
+	      ADDR_WIDTH : integer);
 
 port (
 	addr1, addr2 : in STD_LOGIC_VECTOR(ADDR_WIDTH-1 downto 0);
