@@ -4,11 +4,11 @@ library IEEE;
 
 entity dpram is
 
---generic ( DATA_WIDTH : integer := 12;
---	      ADDR_WIDTH : integer := 32);
+generic ( DATA_WIDTH : integer := 12;
+	      ADDR_WIDTH : integer := 5);
 			
-generic ( DATA_WIDTH : integer;
-	      ADDR_WIDTH : integer);
+--generic ( DATA_WIDTH : integer;
+--	      ADDR_WIDTH : integer);
 
 port (
 	addr1, addr2 : in STD_LOGIC_VECTOR(ADDR_WIDTH-1 downto 0);
@@ -24,8 +24,8 @@ end dpram;
 
 architecture Behavioural of dpram is
 
-type reg_array is array (ADDR_WIDTH-1 downto 0) of std_logic_vector (DATA_WIDTH-1 downto 0);
-shared variable address : reg_array;
+type reg_array is array ((2**ADDR_WIDTH)-1 downto 0) of std_logic_vector (DATA_WIDTH-1 downto 0);
+shared variable RAM : reg_array;
 
 begin
 
@@ -34,9 +34,11 @@ begin
 
 	if (rising_edge(clk1)) then
 		if (cs1 = '1') then
-			data_out1 <= address(conv_integer(addr1));
-			if (wr1 = '1') then
-				address(conv_integer(addr1)) := data_in1;
+			if (wr1 = '0') then
+				data_out1 <= RAM(conv_integer(addr1));
+			elsif (wr1 = '1') then
+				RAM(conv_integer(addr1)) := data_in1;
+				data_out1  <= (others => '0');
 			end if;
 		end if;
 	end if;
@@ -47,9 +49,9 @@ begin
 
 	if (rising_edge(clk2)) then
 		if (cs2 = '1') then
-			data_out2 <= address(conv_integer(addr2));
+			data_out2 <= RAM(conv_integer(addr2));
 			if (wr2 = '1') then
-				address(conv_integer(addr2)) := data_in2;
+				RAM(conv_integer(addr2)) := data_in2;
 			end if;
 		end if;
 	end if;

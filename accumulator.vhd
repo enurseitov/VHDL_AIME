@@ -19,7 +19,7 @@ end accumulator;
 
 architecture arch of accumulator is
 	signal sum   : unsigned(DATA_WIDTH + ROM_DATA_WIDTH + ADDR_WIDTH -1 downto 0) := (others => '0');
-	signal count : integer RANGE 0 to 37;
+	signal count : unsigned (4 downto 0) :=  (others => '0');
 
 begin
 	process(clk, rst_n)
@@ -31,11 +31,11 @@ begin
 			if mode_in = '1' then       -- memory filling mode, output is 0
 				sum <= (others => '0');
 				data_val <= '0';
-				count <= 0;
+				count <= (others  => '0');
 
 			else                        --accumulation mode, summarize inputs during 32 clicks and put it to output, then constant output till ram filling stage
 				
-				if count <= 31 then
+				if count < 31 then
 					sum   <= sum + unsigned(data_in);
 					count <= count + 1;
 				end if;

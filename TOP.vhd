@@ -24,7 +24,8 @@ architecture Behavioral of TOP is
 		
 		port(
 			en, clk, rst_n : in  STD_LOGIC;
-			addr           : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0)
+			addr           : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0);
+			mode           : out STD_LOGIC
 		);
 	end component sequencer;
 	
@@ -93,6 +94,7 @@ architecture Behavioral of TOP is
 	signal dpram_data_internal : std_logic_vector (DATA_WIDTH - 1 downto 0);
 	signal rom_data_internal : std_logic_vector (ROM_DATA_WIDTH - 1 downto 0);
 	signal mult_output : std_logic_vector ((DATA_WIDTH + ROM_DATA_WIDTH) - 1 downto 0);
+	signal mode : std_logic;
 	
 	    
 
@@ -103,7 +105,9 @@ SEQ:sequencer
 		en    => enable,
 		clk   => clk,
 		rst_n => rst_n,
-		addr  => addr_internal
+		addr  => addr_internal,
+		mode  => mode
+		
 	); 
 	
 DPRM:dpram
@@ -116,7 +120,7 @@ DPRM:dpram
 		addr2     => (addr_internal'range => '0'),
 		cs1       => high,
 		cs2       => low,
-		wr1       => enable,
+		wr1       => mode,
 		wr2       => low,
 		data_in1  => datain_i,
 		data_in2  => (datain_i'range => '0'),
@@ -163,7 +167,7 @@ ACCU:accumulator
 		clk      => clk,
 		rst_n    => rst_n,
 		data_in  => mult_output,
-		mode_in  => enable,
+		mode_in  => mode,
 		data_out => dataout,
 		data_val => dataval
 	);
