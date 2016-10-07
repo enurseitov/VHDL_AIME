@@ -6,9 +6,9 @@ entity multiplier is
 
 
 generic (DATA_WIDTH : integer;
-		ADDR_WIDTH : integer;
-		ROM_DATA_WIDTH : integer;
-		ROM_ADDR_WIDTH : integer
+		--ADDR_WIDTH : integer;
+		ROM_DATA_WIDTH : integer
+		--ROM_ADDR_WIDTH : integer
 		);
 		
 --generic (DATA_WIDTH : integer := 12;

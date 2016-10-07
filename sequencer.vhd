@@ -1,6 +1,6 @@
 library IEEE;
 	use ieee.std_logic_1164.all;
-	use ieee.std_logic_unsigned.all;
+	--use ieee.std_logic_unsigned.all;
 	use ieee.numeric_std.all;
 
 entity sequencer is
@@ -20,9 +20,9 @@ end sequencer;
 
 architecture Behavioural of sequencer is
 
-TYPE state_machine IS (init, active_HIGH, active_LOW);
-SIGNAL present_state, future_state: state_machine;
-signal temp_out : STD_LOGIC_VECTOR(ADDR_WIDTH-1 downto 0) := (others => '0');
+--TYPE state_machine IS (init, active_HIGH, active_LOW);
+--SIGNAL present_state, future_state: state_machine;
+--signal temp_out : STD_LOGIC_VECTOR(ADDR_WIDTH-1 downto 0) := (others => '0');
 signal count : unsigned (ADDR_WIDTH -1 downto 0) := (others => '0');
 signal temp : std_logic;
 
@@ -30,7 +30,7 @@ signal temp : std_logic;
 
 begin
 	
-	update : process (clk, rst_n, en) is
+	update : process (clk, rst_n) is
 	begin
 		if rst_n = '0' then
 			count <= (others => '0');			

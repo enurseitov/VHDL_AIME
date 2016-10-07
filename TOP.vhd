@@ -51,16 +51,16 @@ architecture Behavioral of TOP is
 		port(
 			clk      : in  std_logic;
 			addr_in  : in  std_logic_vector((ROM_ADDR_WIDTH - 1) downto 0);
-			data_out : out std_logic_vector((ROM_DATA_WIDTH) - 1 downto 0)
+			data_out : out std_logic_vector((ROM_DATA_WIDTH - 1) downto 0)
 		);
 	end component rom;
 	
 	component multiplier
 		generic(
 			DATA_WIDTH     : integer;
-			ADDR_WIDTH     : integer;
-			ROM_DATA_WIDTH : integer;
-			ROM_ADDR_WIDTH : integer
+			--ADDR_WIDTH     : integer;
+			ROM_DATA_WIDTH : integer
+			--ROM_ADDR_WIDTH : integer
 		);
 		port(
 			clk, rst_n : in  std_logic;
@@ -140,9 +140,9 @@ ROMM:rom
 MUL:multiplier
 	generic map(
 		DATA_WIDTH     => DATA_WIDTH,
-		ADDR_WIDTH     => ADDR_WIDTH,
-		ROM_DATA_WIDTH => ROM_DATA_WIDTH,
-		ROM_ADDR_WIDTH => ROM_ADDR_WIDTH
+		--ADDR_WIDTH     => ADDR_WIDTH,
+		ROM_DATA_WIDTH => ROM_DATA_WIDTH
+		--ROM_ADDR_WIDTH => ROM_ADDR_WIDTH
 	)
 	port map(
 		clk       => clk,
