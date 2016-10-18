@@ -36,9 +36,9 @@ begin
 		if (cs1 = '1') then
 			if (wr1 = '0') then
 				data_out1 <= RAM(conv_integer(addr1));
-			elsif (wr1 = '1') then
+			else
 				RAM(conv_integer(addr1)) := data_in1;
-				data_out1  <= (others => '0');
+				--data_out1  <= (others => '0');
 			end if;
 		end if;
 	end if;
@@ -49,8 +49,9 @@ begin
 
 	if (rising_edge(clk2)) then
 		if (cs2 = '1') then
+			if (wr2 = '0') then
 			data_out2 <= RAM(conv_integer(addr2));
-			if (wr2 = '1') then
+			else 
 				RAM(conv_integer(addr2)) := data_in2;
 			end if;
 		end if;

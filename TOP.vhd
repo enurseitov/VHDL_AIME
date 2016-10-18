@@ -19,6 +19,16 @@ entity  TOP is
 end TOP;
 
 architecture Behavioral of TOP is
+
+component datain_delay
+	generic(DATA_WIDTH : integer);
+	port(
+		clk : in  std_logic;
+		rst_n : in  std_logic;
+		i   : in  std_logic_vector(DATA_WIDTH - 1 downto 0);
+		o   : out std_logic_vector(DATA_WIDTH - 1 downto 0)
+	);
+end component datain_delay;
 	
 	component sequencer
 		
@@ -95,10 +105,22 @@ architecture Behavioral of TOP is
 	signal rom_data_internal : std_logic_vector (ROM_DATA_WIDTH - 1 downto 0);
 	signal mult_output : std_logic_vector ((DATA_WIDTH + ROM_DATA_WIDTH) - 1 downto 0);
 	signal mode : std_logic;
+	signal datain_delayed: std_logic_vector (DATA_WIDTH - 1 downto 0);
 	
 	    
 
 begin
+	
+DEL:component datain_delay
+	generic map(
+		DATA_WIDTH => DATA_WIDTH
+	)
+	port map(
+		clk => clk,
+		rst_n => rst_n,
+		i   => datain_i,
+		o   => datain_delayed
+	);
 
 SEQ:sequencer
 	port map(
@@ -122,7 +144,7 @@ DPRM:dpram
 		cs2       => low,
 		wr1       => mode,
 		wr2       => low,
-		data_in1  => datain_i,
+		data_in1  => datain_delayed,
 		data_in2  => (datain_i'range => '0'),
 		data_out1 => dpram_data_internal,
 	--	data_out2 => (others => '0'),

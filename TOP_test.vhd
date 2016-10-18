@@ -55,7 +55,84 @@ BEGIN
 		clk <= '1';
 		wait for clk_period/2;
    end process;
+	
+	rst_n <= '0', '1' after 100 ns;
+--datain_i <= "000000000010";
+enable <= '1', '0' after 1000 ns, '1' after 2000 ns, '0' after 3000 ns, '1' after 4000 ns;
  
+   -- Stimulus process
+   stim_proc: process 
+   begin		
+		datain_i <= "000000000000";
+		wait for 2000 ns;
+		datain_i <= std_logic_vector(to_unsigned(1,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(2,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(3,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(4,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(5,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(6,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(7,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(8,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(9,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(10,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(11,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(12,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(13,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(14,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(15,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(16,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(17,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(18,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(19,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(20,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(11,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(22,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(23,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(24,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(25,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(26,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(27,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(28,12));
+		wait for clk_period;
+		datain_i <= std_logic_vector(to_unsigned(29,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(30,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(31,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(32,12));
+		wait for 20 ns;
+		datain_i <= std_logic_vector(to_unsigned(0,12));		
+		wait for 20 ns;
+
+	end process;
 
    -- Stimulus process
 --   stim_proc: process
@@ -70,9 +147,7 @@ BEGIN
 --      wait;
 --   end process;
 
-rst_n <= '0', '1' after 100 ns;
-datain_i <= "000000000010";
-enable <= '1', '0' after 1 ms, '1' after 2 ms, '0' after 3ms, '1' after 4ms;
+
 
 
 END;

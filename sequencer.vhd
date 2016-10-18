@@ -24,7 +24,7 @@ architecture Behavioural of sequencer is
 TYPE state_machine IS (init, load_ram, calc);
 SIGNAL present_state, future_state: state_machine;
 --signal temp_out : STD_LOGIC_VECTOR(ADDR_WIDTH-1 downto 0) := (others => '0');
-signal count : unsigned (ADDR_WIDTH -1 downto 0) := (others => '0');
+signal count,countless : unsigned (ADDR_WIDTH -1 downto 0) := (others => '0');
 --signal temp : std_logic;
 signal ff1, ff2 : std_logic;
 
@@ -78,6 +78,7 @@ begin
 			count <= (others =>  '0');
 		when load_ram =>			
 			count  <= count + 1;
+			countless <= count - 1;
 			if count = 31 then
 				count  <= (others  => '0');
 			end if;
@@ -93,7 +94,7 @@ begin
 	
 end process;
 	
-	addr   <= std_logic_vector(count);
+	addr   <= std_logic_vector(count-1);
 --	update : process (clk, rst_n) is
 --	begin
 --		if rst_n = '0' then
