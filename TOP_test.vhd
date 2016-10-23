@@ -20,7 +20,7 @@ ARCHITECTURE behavior OF TOP_test IS
          dataval : OUT  std_logic
         );
     END COMPONENT;
-    
+       
 
    --Inputs
    signal clk : std_logic := '0';
