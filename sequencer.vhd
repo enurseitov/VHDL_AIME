@@ -44,11 +44,13 @@ M: process (rst_n, clk)
 
 end process;
 
-F: process (present_state, ff1, ff2, count)
+F: process (present_state, ff1, count, en)
 	begin
 	case present_state is 
-		when init =>
-			if (ff1 = '1' and ff2 =  '0') then 
+	when init =>
+		mode  <= '0';
+		  --if (ff1 = '1' and ff2 =  '0') then 
+			if (en = '1' and ff1 =  '0') then 
 				future_state <= load_ram;
 				
 			else 
@@ -58,8 +60,9 @@ F: process (present_state, ff1, ff2, count)
 			mode  <= '1';
 			if (count = 31) then 
 				future_state <= calc;
-				
+								
 			else future_state <=load_ram;
+				
 			end if;
 		when calc =>
 			mode  <= '0';
@@ -94,7 +97,9 @@ begin
 	
 end process;
 	
-	addr   <= std_logic_vector(count-1);
+addr   <= std_logic_vector(count);
+
+
 --	update : process (clk, rst_n) is
 --	begin
 --		if rst_n = '0' then

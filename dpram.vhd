@@ -24,7 +24,7 @@ end dpram;
 
 architecture Behavioural of dpram is
 
-type reg_array is array ((2**ADDR_WIDTH)-1 downto 0) of std_logic_vector (DATA_WIDTH-1 downto 0);
+type reg_array is array ((2**ADDR_WIDTH)-1 downto 0) of std_logic_vector (DATA_WIDTH-1 downto 0) ;
 shared variable RAM : reg_array;
 
 begin

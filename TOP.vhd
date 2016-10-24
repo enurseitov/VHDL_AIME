@@ -100,7 +100,7 @@ end component datain_delay;
 	
 	signal addr_internal : std_logic_vector (ADDR_WIDTH - 1 downto 0);
 	signal high : std_logic := '1';
-	signal low : std_logic := '1';
+	signal low : std_logic := '0';
 	signal dpram_data_internal : std_logic_vector (DATA_WIDTH - 1 downto 0);
 	signal rom_data_internal : std_logic_vector (ROM_DATA_WIDTH - 1 downto 0);
 	signal mult_output : std_logic_vector ((DATA_WIDTH + ROM_DATA_WIDTH) - 1 downto 0);

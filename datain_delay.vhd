@@ -25,7 +25,7 @@ begin
 		elsif rising_edge(clk) then
 			ff1  <= i;
 			ff2 <= ff1;
-			o  <= ff2;
+			o  <= i;
 		end if;
 	end process name;
 	

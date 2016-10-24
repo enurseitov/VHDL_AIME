@@ -59,8 +59,8 @@ BEGIN
 	rst_n <= '0', '1' after 100 ns;
 --datain_i <= "000000000010";
 enable <= '1', '0' after 1000 ns, '1' after 2000 ns, '0' after 3000 ns, '1' after 4000 ns;
- 
-   -- Stimulus process
+ --datain_i  <= "000000000001";
+
    stim_proc: process 
    begin		
 		datain_i <= "000000000000";
@@ -105,7 +105,7 @@ enable <= '1', '0' after 1000 ns, '1' after 2000 ns, '0' after 3000 ns, '1' afte
 		wait for clk_period;
 		datain_i <= std_logic_vector(to_unsigned(20,12));
 		wait for clk_period;
-		datain_i <= std_logic_vector(to_unsigned(11,12));
+		datain_i <= std_logic_vector(to_unsigned(21,12));
 		wait for 20 ns;
 		datain_i <= std_logic_vector(to_unsigned(22,12));
 		wait for clk_period;

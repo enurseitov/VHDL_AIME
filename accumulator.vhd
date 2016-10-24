@@ -20,6 +20,7 @@ end accumulator;
 architecture arch of accumulator is
 	signal sum   : unsigned(DATA_WIDTH + ROM_DATA_WIDTH + ADDR_WIDTH -1 downto 0) := (others => '0');
 	signal count : unsigned (4 downto 0) :=  (others => '0');
+	signal ff1,ff2 : std_logic;
 
 begin
 	process(clk, rst_n)
@@ -28,7 +29,9 @@ begin
 			sum <= (others => '0');
 
 		elsif (clk'event and clk = '1') then
-			if mode_in = '1' then       -- memory filling mode, output is 0
+			ff1  <=  mode_in;
+			ff2 <= ff1;
+			if ff2 = '1' then       -- memory filling mode, output is 0
 				sum <= (others => '0');
 				data_val <= '0';
 				count <= (others  => '0');
